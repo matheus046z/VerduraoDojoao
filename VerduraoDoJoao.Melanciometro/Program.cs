@@ -11,7 +11,7 @@ namespace VerduraoDoJoao.Melanciometro
             float CarrinhoComumKg = 0;
             float CarrinhoBabyKg = 0;
             string resposta;
-            string escolhaMstr;
+            string escolhaMstr=null;
             double PrecoComum = 5.50;
             double PrecoBaby = 8.56;
 
@@ -26,16 +26,19 @@ namespace VerduraoDoJoao.Melanciometro
                 switch (resposta)
                 {
                     case "S":
+                        
 
                         switch (escolhaMstr)
                         {
                             case "1":
+                                break;
                             case "2":
                             case "3":
                             default:
                                 break;
 
                         }
+                        break;
 
                     case "N":
                         Console.WriteLine("Que pena, até a próxima");
