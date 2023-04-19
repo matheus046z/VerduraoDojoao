@@ -23,105 +23,74 @@ namespace VerduraoDoJoao.Melanciometro
 
             while (true)
             {
-                switch (resposta)
+                if (resposta == "S")
                 {
-                    case "S":
-                        
+                    Console.Clear();
+                    Console.WriteLine(" 1 - Melancia Comum (R$ 5.50) (" + CarrinhoComumKg + " kg no carrinho)");
+                    Console.WriteLine(" 2 - Melancia Baby (R$ 8.56) (" + CarrinhoBabyKg + " kg no carrinho)");
+                    Console.WriteLine(" 3 - Finalizar compra");
+                    Console.WriteLine("Digite a opção (1, 2 ou 3)");
+                    escolhaMstr = Console.ReadLine();
 
-                        switch (escolhaMstr)
-                        {
-                            case "1":
-                                break;
-                            case "2":
-                            case "3":
-                            default:
-                                break;
-
-                        }
-                        break;
-
-                    case "N":
-                        Console.WriteLine("Que pena, até a próxima");
-                        Console.ReadKey(true);
-                        break;
-                    
-                    default:
-                        {
-                            Console.WriteLine("Digite S ou N!");
-                            resposta = Console.ReadLine();
-                            resposta = resposta.ToUpper();
+                    switch (escolhaMstr)
+                    {
+                        case "1":
+                            try
+                            {
+                                Console.WriteLine("Quantos Kg de Melancia Comum deseja adicionar ao carrinho?");
+                                CarrinhoComumKg += float.Parse(Console.ReadLine());
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("Digite um valor válido de Kg!");
+                                Console.ReadKey();
+                            }
                             break;
 
-                        }
+                        case "2":
+                            try
+                            {
+                                Console.WriteLine("Quantos Kg de Melancia Baby deseja adicionar ao carrinho?");
+                                CarrinhoBabyKg += float.Parse(Console.ReadLine());
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("Digite um valor válido de Kg!");
+                                Console.ReadKey();
+                            }
+                            break;
+
+                        case "3":
+                            Console.Clear();
+                            Console.WriteLine("O seu carrinho contem:");
+                            Console.WriteLine(CarrinhoComumKg + " Kg de melancia comum, total: R$" + CarrinhoComumKg * PrecoComum);
+                            Console.WriteLine(CarrinhoBabyKg + " Kg de melancia baby, total: R$" + CarrinhoBabyKg * PrecoBaby);
+                            Console.WriteLine("Sua compra ficou com valor de: R$" + ((CarrinhoComumKg * PrecoComum) + (CarrinhoBabyKg * PrecoBaby)));
+                            Console.WriteLine("Obrigado pela preferência, volte sempre!");
+                            Console.ReadKey();
+                            return;
+                            
+                        default:
+                            Console.WriteLine("Digite 1, 2 ou 3!");
+                            Console.ReadKey();
+                            break;
+
+                    }
                 }
-                //if (resposta == "S")
-                //{
-                //    Console.Clear();
-                //    Console.WriteLine(" 1 - Melancia Comum (R$ 5.50) (" +CarrinhoComumKg +" kg no carrinho)");
-                //    Console.WriteLine(" 2 - Melancia Baby (R$ 8.56) (" +CarrinhoBabyKg + " kg no carrinho)");
-                //    Console.WriteLine(" 3 - Finalizar compra");
-                //    Console.WriteLine("Digite a opção (1, 2 ou 3)");
-                //    escolhaMstr = Console.ReadLine();
+                else if (resposta == "N")
+                {
+                    Console.WriteLine("Que pena, até a próxima");
+                    Console.ReadKey(true);
+                    break;
 
-                //    if (escolhaMstr == "1")
-                //    {
-                //        try
-                //        {
-                //            Console.WriteLine("Quantos Kg de Melancia Comum deseja adicionar ao carrinho?");
-                //            CarrinhoComumKg += float.Parse(Console.ReadLine());
-                //        }
-                //        catch (FormatException)
-                //        {
-                //            Console.WriteLine("Digite um valor válido de Kg!");
-                //            Console.ReadKey();
-                //        }
-                //    }
-                //    else if (escolhaMstr == "2")
-                //    {
-                //        try
-                //        {
-                //            Console.WriteLine("Quantos Kg de Melancia Baby deseja adicionar ao carrinho?");
-                //            CarrinhoBabyKg += float.Parse(Console.ReadLine());
-                //        }
-                //        catch (FormatException)
-                //        {
-                //            Console.WriteLine("Digite um valor válido de Kg!");
-                //            Console.ReadKey();
-                //        }
-
-                //    }
-                //    else if (escolhaMstr == "3")
-                //    {
-                //        Console.Clear();
-                //        Console.WriteLine("O seu carrinho contem:");
-                //        Console.WriteLine(CarrinhoComumKg + " Kg de melancia comum, total: R$" + CarrinhoComumKg * PrecoComum);
-                //        Console.WriteLine(CarrinhoBabyKg + " Kg de melancia baby, total: R$" + CarrinhoBabyKg * PrecoBaby);
-                //        Console.WriteLine("Sua compra ficou com valor de: R$" + ((CarrinhoComumKg * PrecoComum) + (CarrinhoBabyKg * PrecoBaby)));
-                //        Console.WriteLine("Obrigado pela preferência, volte sempre!");
-                //        Console.ReadKey();
-                //        break;
-
-                //    }
-                //    else
-                //    {
-                //        Console.WriteLine("Digite 1, 2 ou 3!");
-                //        Console.ReadKey();
-                //    }
-                //}
-                //else if (resposta == "N")
-                //{
-                //    Console.WriteLine("Que pena, até a próxima");
-                //    Console.ReadKey(true);
-                //    break;
-                //}
-                //else
-                //{
-                //    Console.WriteLine("Digite S ou N!");
-                //    resposta = Console.ReadLine();
-                //    resposta = resposta.ToUpper();
-
-                //}
-            }
+                }
+                else
+                {
+                    Console.WriteLine("Digite S ou N!");
+                    resposta = Console.ReadLine();
+                    resposta = resposta.ToUpper();
+                }
+            }     
         }
     }
 }
