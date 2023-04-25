@@ -27,24 +27,27 @@ namespace VerduraoDoJoao.Melanciometro
         {
             float CarrinhoComumKg = 0;
             float CarrinhoBabyKg = 0;
-            string resposta;
+            string resposta = "";
             string escolhaMstr;
             double PrecoComum = 5.50;
             double PrecoBaby = 8.56;
             string DiaSemana;
             bool DiaLoop = true;
-            bool LojaLoop = true;
-            //string placa = " ";
-            int digitosPlaca;
-            Dictionary <string, string> placa = new Dictionary <string, string> ();
+            bool MenuLoop = true;  
+            // Dictionary <string, string> placa = new Dictionary <string, string> ();
             int tentativas = 0;
             string usuario;
             string senha;
-            bool bUsuario = true;
             bool bSenha = true;
             StringBuilder senhasb = new StringBuilder ();
-            StringBuilder usuariosb = new StringBuilder();
+            StringBuilder Placa = new StringBuilder();
             string asterisco = "";
+            string placa3L = null;
+            int placa1N;
+            string placa1L = null;
+            int placa2N;
+            bool placaCadastrada = false;
+            string SoN = "";
 
             // Login
             while (tentativas < 3)
@@ -54,28 +57,8 @@ namespace VerduraoDoJoao.Melanciometro
                 Console.WriteLine("\n");
                 Console.WriteLine("Digite o nome de usuário e tecle enter:");
                 Console.WriteLine("USUÁRIO:");
-
-                while (bUsuario == true)
-                {
-
-                    var tecla = Console.ReadKey(true);
-                    if (tecla.Key == ConsoleKey.Enter)
-                    {
-                        bUsuario = false;
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine("VOCE TEM " + (3 - tentativas) + " TENTATIVAS PARA INSERIR SUAS CREDENCIAIS");
-                        Console.WriteLine("\n");
-                        Console.WriteLine("Digite o nome de usuário e tecle enter:");
-                        usuariosb.Append(tecla.KeyChar);
-                        asterisco += "*";
-                        Console.WriteLine("USUÁRIO:" + asterisco);
-
-                    }
-                }
-                usuario = usuariosb.ToString();
+                usuario = Console.ReadLine();
+                usuario = usuario.ToLower();
 
                 Console.Clear();
                 Console.WriteLine("VOCE TEM " + (3 - tentativas) + " TENTATIVAS PARA INSERIR SUAS CREDENCIAIS");
@@ -116,9 +99,7 @@ namespace VerduraoDoJoao.Melanciometro
                 {
                     Console.WriteLine("Usuário ou senha errados!");
                     tentativas += 1;
-                    usuariosb.Clear();
                     senhasb.Clear();
-                    bUsuario = true;
                     bSenha = true;
                     asterisco = "";
                     Console.ReadKey();
@@ -135,17 +116,30 @@ namespace VerduraoDoJoao.Melanciometro
                 }
             }
 
-            Console.WriteLine("1 - Realizar compras");
-            Console.WriteLine("2 - Cadastrar um caminhão e motorista para realizar a entrega."); // Cadastrar com readkey letra por letra
-            Console.WriteLine("3 - Sair");
-            resposta = Console.ReadLine();
-
+            string PlacaStr = null;
             string promocao = null;
             string dia = "";
-
+            bool cadastrando = true;
+            bool digitosPlaca = true;
+            
             // Loja e cadastro
-            while (LojaLoop == true) 
+            while (MenuLoop == true) 
             {
+                Console.Clear();
+                Console.WriteLine("MENU DE OPÇOES - Digite a opção e tecle enter. \n");
+                Console.WriteLine("1 - Realizar compras");
+                Console.WriteLine("2 - Cadastrar a placa do caminhão para realizar a entrega.");
+                Console.WriteLine("3 - Sair");
+                resposta = Console.ReadLine();
+
+
+                if(placaCadastrada == true)
+                {
+                    Console.WriteLine("\n");
+                    Console.WriteLine("Placa do caminhão que fará a entrega: " + PlacaStr);
+                }
+                
+
                 if (resposta == "1")
                 {
                     while (DiaLoop == true)
@@ -222,6 +216,7 @@ namespace VerduraoDoJoao.Melanciometro
                     //COMPRANDO
 
                     bool comprando = true;
+                    
 
                     while (comprando == true)
                     {
@@ -298,31 +293,40 @@ namespace VerduraoDoJoao.Melanciometro
                                 Console.WriteLine("TOTAL: R$" + ((CarrinhoComumKg * ArredPrecoC) + (CarrinhoBabyKg * ArredPrecoB)));
                                 Console.WriteLine("\n");
                                 Console.WriteLine("\n");
-                                Console.WriteLine("Deseja cadastrar um caminhão para realizar a entrega? (S/N)");
-                                string SoN = Console.ReadLine();
-                                SoN = SoN.ToLower();
-                                while (true)
+                                
+                                if (placaCadastrada == true)
                                 {
-                                    if (SoN == "s")
+                                    Console.WriteLine("Placa do caminhão que fará a entrega: " + PlacaStr);
+                                    Console.WriteLine("\n Obrigado pela preferência e volte sempre!");
+                                    Console.ReadKey();
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Deseja cadastrar um caminhão para realizar a entrega? (S/N)");
+                                    SoN = Console.ReadLine();
+                                    SoN = SoN.ToLower();
+                                    
+                                    switch (SoN)
                                     {
-                                        resposta = "2";
-                                        comprando = false;
-                                        break;
-                                    }
-                                    else if (SoN == "n")
-                                    {
-                                        Console.WriteLine("Obrigado pela preferência, volte sempre!");
-                                        Console.ReadKey();
-                                        comprando = false;
-                                        LojaLoop = false;
-
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("A resposta deve ser S ou N");
-                                        SoN = Console.ReadLine();
-                                        SoN = SoN.ToLower();
+                                        case "s": 
+                                            resposta = "2";
+                                            comprando = false;
+                                            cadastrando = true;
+                                            escolhaMstr = "3";
+                                            break;
+                                        
+                                        case "n": 
+                                            Console.WriteLine("Obrigado pela preferência, volte sempre!");
+                                            Console.ReadKey();
+                                            comprando = false;
+                                            MenuLoop = false;
+                                            break;
+                                        
+                                        default:
+                                            Console.WriteLine("Resposta deve ser S/N !");
+                                            Console.ReadKey();
+                                            break;
                                     }
                                 }
                                 break;
@@ -337,18 +341,93 @@ namespace VerduraoDoJoao.Melanciometro
                     
                 else if(resposta == "2") // Cadastrar caminhão
                 {
-                    Console.WriteLine("CADASTRANDO CAMINHÃO");
-                    Console.WriteLine("IR PARA A LOJA ?"); // Se sim, resposta = 1, no proximo loop volta pra loja
-                    Console.ReadKey();
-                    Environment.Exit(0);
+                    while (cadastrando == true)
+                    {
+                        placa3L = "";
+                        placa1N = 0;
+                        placa1L = "";
+                        placa2N = 0;
 
+                        Console.Clear();
+                        Console.WriteLine("CADASTRANDO PLACA\n");
+                        Console.WriteLine("Digite a placa do caminhão no modelo Mercosul");
+                        Console.WriteLine("Modelo: (AAA1A11)");
+                        Console.WriteLine("Placa a ser cadastrada: " + Placa.ToString().ToUpper());
+                        // Console.WriteLine("numero de digitos placa: " + Placa.Length);
+
+                        var tecla = Console.ReadKey(true);
+                        if (tecla.Key == ConsoleKey.Enter)
+                        {
+                            cadastrando = false;
+                            try
+                            {
+                                // Console.Clear();
+                                // Console.WriteLine("Placa Cadastrada!");
+                                //Console.WriteLine("Placa: " + PlacaStr);
+                                placa3L = PlacaStr.Substring(0, 3);
+                                placa1N = int.Parse(PlacaStr.Substring(3, 1));
+                                placa1L = PlacaStr.Substring(4, 1);
+                                placa2N = int.Parse(PlacaStr.Substring(5)); // output 11, corta da pos 5 pra tras incluindo a 5
+                                // Console.WriteLine(placa3L + "\n" + placa1N + "\n" + placa1L + "\n" + placa2N);
+                                placaCadastrada = true;
+                                
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("\n ERRO - A placa deve seguir o formato AAA1A11 de letras (A) e numeros (1) !");
+                                Console.ReadKey();
+                                Placa.Clear();
+                                cadastrando = true;
+                                placaCadastrada = false;
+                                break;
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                Console.WriteLine("\n ERRO - A placa deve seguir o formato AAA1A11 de letras (A) e numeros (1) !");
+                                Console.ReadKey();
+                                Placa.Clear();
+                                cadastrando = true;
+                                placaCadastrada = false;
+                                break;
+                            }      
+                        }
+                        if (tecla.Key == ConsoleKey.Backspace && Placa.Length > 0)
+                        {
+                            Placa.Remove(Placa.Length - 1, 1);
+                        }
+                        else if (tecla.Key != ConsoleKey.Backspace && tecla.Key != ConsoleKey.Enter)
+                        {
+                            Placa.Append(tecla.KeyChar);
+                            // Console.WriteLine("Placa a ser cadastrada: " + Placa);
+                            PlacaStr = Placa.ToString();
+                            PlacaStr = PlacaStr.ToUpper();
+                        }
+                        if (PlacaStr.Length > 7)
+                        {
+                            Console.WriteLine("\n ERRO - Placa a ser cadastrada deve ter no máximo 7 dígitos!: ");
+                            Console.WriteLine("Pressione qualquer tecla para continuar.");
+                            Placa.Remove(Placa.Length - 1, 1);
+                            PlacaStr = Placa.ToString();
+                            Console.ReadKey();
+                            Placa.Clear();
+                            Console.Clear();
+                        }
+                        
+                        if (placaCadastrada == true) // placa cadastrada
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Placa cadastrada com sucesso!\n");
+                            Console.WriteLine("Placa: " + PlacaStr);
+                            cadastrando = false;
+                            Console.ReadKey();
+                        }
+                    }
                 }
                 else if (resposta == "3")
                 {
-                    Console.WriteLine("Que pena, até a próxima");
+                    Console.WriteLine("Até a próxima!");
                     Console.ReadKey(true);
                     break;
-
                 }
                 else
                 {
