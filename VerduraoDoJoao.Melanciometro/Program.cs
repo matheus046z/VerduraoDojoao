@@ -22,13 +22,13 @@ namespace VerduraoDoJoao.Melanciometro
             double PrecoBaby = 8.56;
             string DiaSemana;
             bool DiaLoop = true;
-            bool MenuLoop = true;  
+            bool MenuLoop = true;
             // Dictionary <string, string> placa = new Dictionary <string, string> ();
             int tentativas = 0;
             string usuario;
             string senha;
             bool bSenha = true;
-            StringBuilder senhasb = new StringBuilder ();
+            StringBuilder senhasb = new StringBuilder();
             StringBuilder Placa = new StringBuilder();
             string asterisco = "";
             string placa3L = null;
@@ -47,7 +47,7 @@ namespace VerduraoDoJoao.Melanciometro
                 Console.WriteLine("Digite o nome de usuário e tecle enter:");
                 Console.WriteLine("USUÁRIO:");
                 usuario = Console.ReadLine();
-                usuario = usuario.ToLower();
+                //usuario = usuario.ToLower();
 
                 Console.Clear();
                 Console.WriteLine("VOCE TEM " + (3 - tentativas) + " TENTATIVAS PARA INSERIR SUAS CREDENCIAIS");
@@ -77,7 +77,7 @@ namespace VerduraoDoJoao.Melanciometro
                 }
                 senha = senhasb.ToString();
 
-                if (usuario == "joao" && senha == "123")
+                if (usuario == "joão" && senha == "123")
                 {
                     Console.WriteLine("Login efetuado com sucesso.");
                     Console.ReadKey();
@@ -110,24 +110,22 @@ namespace VerduraoDoJoao.Melanciometro
             string dia = "";
             bool cadastrando = true;
             bool digitosPlaca = true;
-            
+
             // Loja e cadastro
-            while (MenuLoop == true) 
+            while (MenuLoop == true)
             {
                 Console.Clear();
                 Console.WriteLine("MENU DE OPÇOES - Digite a opção e tecle enter. \n");
                 Console.WriteLine("1 - Realizar compras");
                 Console.WriteLine("2 - Cadastrar a placa do caminhão para realizar a entrega.");
                 Console.WriteLine("3 - Sair");
-                resposta = Console.ReadLine();
-
-
-                if(placaCadastrada == true)
+                if (placaCadastrada == true)
                 {
                     Console.WriteLine("\n");
                     Console.WriteLine("Placa do caminhão que fará a entrega: " + PlacaStr);
                 }
-                
+
+                resposta = Console.ReadLine();
 
                 if (resposta == "1")
                 {
@@ -142,12 +140,17 @@ namespace VerduraoDoJoao.Melanciometro
                         Console.WriteLine("3 - QUARTA VERDE 17% DE DESCONTO");
                         Console.WriteLine("4 - Quinta"); // Desconto de 2%
                         Console.WriteLine("5 - Sexta"); // Desconto de 3%
+                        if (placaCadastrada == true)
+                        {
+                            Console.WriteLine("\n");
+                            Console.WriteLine("Placa do caminhão que fará a entrega: " + PlacaStr);
+                        }
                         DiaSemana = Console.ReadLine();
-                        
+
                         switch (DiaSemana)
                         {
                             case "1":
-                                Console.Clear(); 
+                                Console.Clear();
                                 Console.WriteLine("Hoje é Segunda");
                                 PrecoBaby = PrecoBaby * (1 - 0.01);
                                 PrecoComum = PrecoComum * (1 - 0.01);
@@ -156,7 +159,7 @@ namespace VerduraoDoJoao.Melanciometro
                                 break;
 
                             case "2":
-                                Console.Clear(); 
+                                Console.Clear();
                                 Console.WriteLine("Hoje é a Terça Verde e temos promoção de 15%!");
                                 PrecoBaby = PrecoBaby * (1 - 0.15);
                                 PrecoComum = PrecoComum * (1 - 0.15);
@@ -166,18 +169,18 @@ namespace VerduraoDoJoao.Melanciometro
                                 break;
 
                             case "3":
-                                Console.Clear(); 
+                                Console.Clear();
                                 Console.WriteLine("Hoje é a Quarta Verde e temos promoção de 17%!");
                                 PrecoBaby = PrecoBaby * (1 - 0.17);
                                 PrecoComum = PrecoComum * (1 - 0.17);
                                 DiaLoop = false;
                                 dia = "Quarta";
                                 promocao = "17%";
-                                
+
                                 break;
 
                             case "4":
-                                Console.Clear(); 
+                                Console.Clear();
                                 Console.WriteLine("Hoje é Quinta");
                                 PrecoBaby = PrecoBaby * (1 - 0.02);
                                 PrecoComum = PrecoComum * (1 - 0.02);
@@ -186,7 +189,7 @@ namespace VerduraoDoJoao.Melanciometro
                                 break;
 
                             case "5":
-                                Console.Clear(); 
+                                Console.Clear();
                                 Console.WriteLine("Hoje é Sexta");
                                 PrecoBaby = PrecoBaby * (1 - 0.03);
                                 PrecoComum = PrecoComum * (1 - 0.03);
@@ -200,12 +203,12 @@ namespace VerduraoDoJoao.Melanciometro
                                 break;
                         }
                     }
-                    
-                    
+
+
                     //COMPRANDO
 
                     bool comprando = true;
-                    
+
 
                     while (comprando == true)
                     {
@@ -219,12 +222,14 @@ namespace VerduraoDoJoao.Melanciometro
                             Console.WriteLine("Hoje é " + dia + " Feira");
                         }
 
-                        float ArredPrecoC = (float)(Math.Round((double)PrecoComum, 2));
-                        float ArredPrecoB = (float)(Math.Round((double)PrecoBaby, 2));
+                        //float ArredPrecoC = (float)(Math.Round((double)PrecoComum, 2));
+                        //float ArredPrecoB = (float)(Math.Round((double)PrecoBaby, 2));
+                        double ArredPrecoC = PrecoComum;
+                        double ArredPrecoB = PrecoBaby;
 
                         Console.WriteLine("\n");
-                        Console.WriteLine(" 1 - Melancia Comum | R$" + ArredPrecoC + " | " + CarrinhoComumKg + " kg no carrinho");
-                        Console.WriteLine(" 2 - Melancia Baby  | R$" + ArredPrecoB + " | " + CarrinhoBabyKg + " kg no carrinho");
+                        Console.WriteLine(" 1 - Melancia Comum | R$" + Math.Round(ArredPrecoC, 2) + " | " + Math.Round(CarrinhoComumKg, 2) + " kg no carrinho");
+                        Console.WriteLine(" 2 - Melancia Baby  | R$" + Math.Round(ArredPrecoB, 2) + " | " + Math.Round(CarrinhoBabyKg, 2) + " kg no carrinho");
                         Console.WriteLine(" 3 - Finalizar compra");
                         Console.WriteLine("\n");
                         Console.WriteLine("Digite o número da opção e tecle enter (1 a 3)");
@@ -276,13 +281,13 @@ namespace VerduraoDoJoao.Melanciometro
                             case "3":
                                 Console.Clear();
                                 Console.WriteLine("O seu carrinho contem: \n");
-                                Console.WriteLine("Melancia Comum       "+ CarrinhoComumKg +"Kg   |   R$" + CarrinhoComumKg * ArredPrecoC);
-                                Console.WriteLine("Melancia Baby        "+ CarrinhoBabyKg +"Kg   |   R$" + CarrinhoBabyKg * ArredPrecoB);
+                                Console.WriteLine("Melancia Comum       " + CarrinhoComumKg + "Kg   |   R$" + Math.Round(CarrinhoComumKg * ArredPrecoC, 2));
+                                Console.WriteLine("Melancia Baby        " + CarrinhoBabyKg + "Kg   |   R$" + Math.Round(CarrinhoBabyKg * ArredPrecoB, 2));
                                 Console.WriteLine("----------------------------------------------- \n");
-                                Console.WriteLine("TOTAL: R$" + ((CarrinhoComumKg * ArredPrecoC) + (CarrinhoBabyKg * ArredPrecoB)));
+                                Console.WriteLine("TOTAL: R$" + Math.Round((CarrinhoComumKg * ArredPrecoC) + (CarrinhoBabyKg * ArredPrecoB), 2));
                                 Console.WriteLine("\n");
                                 Console.WriteLine("\n");
-                                
+
                                 if (placaCadastrada == true)
                                 {
                                     Console.WriteLine("Placa do caminhão que fará a entrega: " + PlacaStr);
@@ -295,23 +300,23 @@ namespace VerduraoDoJoao.Melanciometro
                                     Console.WriteLine("Deseja cadastrar um caminhão para realizar a entrega? (S/N)");
                                     SoN = Console.ReadLine();
                                     SoN = SoN.ToLower();
-                                    
+
                                     switch (SoN)
                                     {
-                                        case "s": 
+                                        case "s":
                                             resposta = "2";
                                             comprando = false;
                                             cadastrando = true;
                                             escolhaMstr = "3";
                                             break;
-                                        
-                                        case "n": 
+
+                                        case "n":
                                             Console.WriteLine("Obrigado pela preferência, volte sempre!");
                                             Console.ReadKey();
                                             comprando = false;
                                             MenuLoop = false;
                                             break;
-                                        
+
                                         default:
                                             Console.WriteLine("Resposta deve ser S/N !");
                                             Console.ReadKey();
@@ -327,8 +332,8 @@ namespace VerduraoDoJoao.Melanciometro
                         }
                     }
                 }
-                    
-                else if(resposta == "2") // Cadastrar caminhão
+
+                else if (resposta == "2") // Cadastrar caminhão
                 {
                     while (cadastrando == true)
                     {
@@ -356,7 +361,7 @@ namespace VerduraoDoJoao.Melanciometro
                                 placa2N = int.Parse(PlacaStr.Substring(5)); // output 11, corta da pos 5 pra tras incluindo a 5
                                 // Console.WriteLine(placa3L + "\n" + placa1N + "\n" + placa1L + "\n" + placa2N);
                                 placaCadastrada = true;
-                                
+
                             }
                             catch (FormatException)
                             {
@@ -375,7 +380,7 @@ namespace VerduraoDoJoao.Melanciometro
                                 cadastrando = true;
                                 placaCadastrada = false;
                                 break;
-                            }      
+                            }
                         }
                         if (tecla.Key == ConsoleKey.Backspace && Placa.Length > 0)
                         {
@@ -398,7 +403,7 @@ namespace VerduraoDoJoao.Melanciometro
                             Placa.Clear();
                             Console.Clear();
                         }
-                        
+
                         if (placaCadastrada == true) // placa cadastrada
                         {
                             Console.Clear();
@@ -421,7 +426,7 @@ namespace VerduraoDoJoao.Melanciometro
                     resposta = Console.ReadLine();
 
                 }
-            }     
+            }
         }
     }
 }
