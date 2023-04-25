@@ -10,17 +10,6 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace VerduraoDoJoao.Melanciometro
 {
-    //public class Cadastro
-    //{
-    //    public void CadastrarPlaca(string Placa)
-    //    {
-            
-    //    }
-    //    public void CadastrarNome(string Nome)
-    //    {
-
-    //    }
-    //}
     internal class Program
     {
         static void Main(string[] args)
@@ -361,9 +350,6 @@ namespace VerduraoDoJoao.Melanciometro
                             cadastrando = false;
                             try
                             {
-                                // Console.Clear();
-                                // Console.WriteLine("Placa Cadastrada!");
-                                //Console.WriteLine("Placa: " + PlacaStr);
                                 placa3L = PlacaStr.Substring(0, 3);
                                 placa1N = int.Parse(PlacaStr.Substring(3, 1));
                                 placa1L = PlacaStr.Substring(4, 1);
