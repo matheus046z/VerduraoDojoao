@@ -1,6 +1,6 @@
 # Descrição do projeto
 ## Problema
-#### João solicita um “Melanciometro” , software este, que irá ajuda-lo no controle de dois tipos de Melancias (Comum e Baby).   
+#### João solicita um “Melanciometro” , software este, que irá ajuda-lo no controle de dois tipos de Melancias (Comum e Baby) e cadastrar a placa do caminhão que fará a entrega.   
 
 ## Resultados Esperados
 #### •	O software deve permitir a entrada da placa do caminhão
