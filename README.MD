@@ -1,4 +1,6 @@
 # Descrição do projeto
+#### Exercício realizado durante o curso de Programador C# no SENAI.
+
 ## Problema
 #### João solicita um “Melanciometro” , software este, que irá ajuda-lo no controle de dois tipos de Melancias (Comum e Baby) e cadastrar a placa do caminhão que fará a entrega.   
 
