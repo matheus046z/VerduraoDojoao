@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "tarefa-OpenFolder",
+      "appliesTo": "../../../AppData/Local/Microsoft/VisualStudio/17.0_9fb03c68/OpenFolder/",
+      "type": "launch"
+    },
+    {
+      "taskLabel": "tarefa-VerduraoDojoao",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}

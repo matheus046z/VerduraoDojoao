@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\VerduraoDoJoao.Melanciometro"
+    "\\Configurações locais (.vs)",
+    "\\VerduraoDoJoao.Melanciometro",
+    "\\VerduraoDoJoao.Melanciometro\\bin",
+    "\\VerduraoDoJoao.Melanciometro\\bin\\Debug",
+    "\\VerduraoDoJoao.Melanciometro\\obj"
   ],
-  "SelectedNode": "\\VerduraoDoJoao.Melanciometro\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
